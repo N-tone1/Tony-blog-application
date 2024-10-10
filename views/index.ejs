@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Blog Application</title>
+</head>
+<body>
+  <h1>Welcome to the Blog Application</h1>
+  
+  <!-- New Post Form -->
+  <h2>Create a New Post</h2>
+  <form action="/posts" method="POST">
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required>
+    </div>
+    
+    <div>
+      <label for="content">Content:</label>
+      <textarea id="content" name="content" rows="5" required></textarea>
+    </div>
+    
+    <button type="submit">Create Post</button>
+  </form>
+  
+  <!-- Displaying All Posts -->
+  <h2>All Posts</h2>
+  <% if (posts.length === 0) { %>
+    <p>No posts yet. Be the first to post!</p>
+  <% } else { %>
+    <ul>
+      <% posts.forEach((post, index) => { %>
+        <li>
+          <h3><%= post.title %></h3>
+          <p><%= post.content %></p>
+          <!-- Future: Add Edit/Delete buttons here -->
+           <!-- Edit Button -->
+            <form action="/posts/edit/<%= index %>" method="GET" style="display:inline;">
+                <button type="submit">Edit</button>
+            </form>
+
+            <!-- Delete Button -->
+            <form action="/posts/delete/<%= index %>" method="POST" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</body>
+</html>
